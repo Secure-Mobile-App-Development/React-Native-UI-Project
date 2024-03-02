@@ -1,29 +1,40 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import NavigationBar from './components/NavBar';
-import HeroSection from './components/HeroSection';
-import PopularPizzas from './components/PopularPizza';
-import Categories from './components/Category';
+import { useState } from "react";
+import { StyleSheet, SafeAreaView, StatusBar } from "react-native";
+import {
+  NavigationBar,
+  HeroSection,
+  PopularPizza,
+  Categories,
+} from "./components/index";
+import { useFonts } from "expo-font";
 
 const App = () => {
+  let [fontsLoaded] = useFonts({
+    "Montserrant-Regular": require("./assets/fonts/Montserrat-Regular.ttf"),
+    "Montserrant-Bold": require("./assets/fonts/Montserrat-Bold.ttf"),
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <NavigationBar />
       <HeroSection />
       <Categories />
-      <PopularPizzas />
-    </View>
+      <PopularPizza />
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    height: "100%",
-    width: "100%",
-    padding: 20,
-    paddingTop: 40,
+    flex: 1,
     backgroundColor: "#fafafa",
-  }
+    marginTop: StatusBar.currentHeight + 10,
+    paddingHorizontal: 15,
+  },
 });
 
 export default App;

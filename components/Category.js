@@ -42,7 +42,7 @@ let CATEGORIES = [
   },
 ];
 
-const Categories = () => {
+export default function  Categories () {
   const [selectedId, setSelectedId] = useState(1);
 
   let [fontsLoaded] = useFonts({
@@ -142,5 +142,3 @@ const styles = StyleSheet.create({
     fontFamily: "Montserrant-Bold",
   },
 });
-
-export default Categories;

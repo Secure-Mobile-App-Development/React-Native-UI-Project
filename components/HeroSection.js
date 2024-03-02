@@ -1,4 +1,4 @@
-import React, { Component, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import {
   View,
   StyleSheet,
@@ -8,30 +8,17 @@ import {
   TextInput,
 } from "react-native";
 import Search from "../assets/heroSection/search-icon.png";
-import { useFonts } from "expo-font";
-import MontserratRegular from "../assets/fonts/Montserrat-Regular.ttf";
-import MontserratBold from "../assets/fonts/Montserrat-Bold.ttf";
 
-const HeroSection = () => {
-  const [searchText, setSearchtext] = useState("");
+export default function HeroSection ()  {
+  const [searchText, setSearchText] = useState("");
   const refInput = useRef(null);
-  let [fontsLoaded] = useFonts({
-    "Montserrant-Regular": MontserratRegular,
-    "Montserrant-Bold": MontserratBold,
-  });
-
-  if (!fontsLoaded) {
-    return null;
+  function handleChange(text) {
+    setSearchText(text);
   }
-
-  function handleChange(e) {
-    setSearchtext(e.target.value);
-  }
-
   return (
     <View style={styles.heroContainer}>
-      <Text style={styles.subTitle}>Food </Text>
-      <Text style={styles.mainTitle}>Delivery </Text>
+      <Text style={styles.subTitle}>Food</Text>
+      <Text style={styles.mainTitle}>Delivery</Text>
       <View style={styles.searchboxContainer}>
         <TouchableOpacity onPress={() => refInput.current.focus()}>
           <Image
@@ -45,53 +32,43 @@ const HeroSection = () => {
           placeholder="Search..."
           ref={refInput}
           value={searchText}
-          onChange={handleChange}
+          onChangeText={handleChange}
         />
       </View>
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   heroContainer: {
-    height: 115,
-    width: "100%",
-    paddingTop: 5,
-    paddingBottom: 5,
-    display: "flex",
-    alignContent: "flex-start",
-    flexDirection: "column",
+    paddingVertical: 5,
   },
   subTitle: {
     fontSize: 16,
-    fontFamily: "Montserrant-Regular",
+    fontFamily: "Montserrat-Regular",
   },
   mainTitle: {
     fontSize: 32,
     fontWeight: "bold",
-    fontFamily: "Montserrant-Bold",
+    fontFamily: "Montserrat-Bold",
   },
   searchboxContainer: {
-    width: "100%",
-    height: 30,
-    paddingTop: 20,
-    display: "flex",
+    paddingVertical: 10,
     flexDirection: "row",
     alignItems: "center",
-    gap: 15,
+    justifyContent: "flex-start",
+    marginRight: 20, // Add margin between the icon and the input
   },
   searchImage: {
     height: 24,
     width: 24,
+    marginRight: 10, // Adjust spacing between the icon and the input
   },
   searchInput: {
     height: 28,
-    width: "83%",
+    flex: 1,
     fontSize: 16,
-    fontFamily: "Montserrant-Regular",
+    fontFamily: "Montserrat-Regular",
     borderBottomColor: "#DBD7D7",
-    borderBottomWidth: 1,
+    borderBottomWidth: 2,
   },
 });
-
-export default HeroSection;
